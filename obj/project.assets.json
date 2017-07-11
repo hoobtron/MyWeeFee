@@ -13811,6 +13811,8 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
       "Microsoft.AspNetCore.All >= 2.0.0-preview2-final",
+      "Microsoft.EntityFrameworkCore.Design >= 2.0.0-preview2-final",
+      "Microsoft.EntityFrameworkCore.Sqlite >= 2.0.0-preview2-final",
       "Microsoft.NETCore.App >= 2.0.0-preview2-25407-01"
     ]
   },
@@ -13856,6 +13858,14 @@
             "autoReferenced": true
           },
           "Microsoft.AspNetCore.All": {
+            "target": "Package",
+            "version": "2.0.0-preview2-final"
+          },
+          "Microsoft.EntityFrameworkCore.Design": {
+            "target": "Package",
+            "version": "2.0.0-preview2-final"
+          },
+          "Microsoft.EntityFrameworkCore.Sqlite": {
             "target": "Package",
             "version": "2.0.0-preview2-final"
           }
