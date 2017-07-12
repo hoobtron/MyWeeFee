@@ -13,8 +13,10 @@ namespace MyWeeFee.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=myweefee.db");
+            optionsBuilder.UseSqlite("Data Source=MyWeeFee.db");
         }
+
+        // define primary and foreign keys for DB Model entities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {            
             modelBuilder.Entity<Admin>()

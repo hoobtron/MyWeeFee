@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace MyWeeFee.Models
 {
-    public class Teacher : User, IUserControl
+    public class Teacher : User //, IUserControl
     {
+        /*
         public void logout() {}
         public void login(string Email, string Password) {}
         public void listUsers() {}
@@ -13,5 +14,6 @@ namespace MyWeeFee.Models
         public void reqClass(string Classname) {}
         public void setClass(Student Student, string Classname) {}
         public void toggleExamMode(Class Class) {}
+         */
     }
 }

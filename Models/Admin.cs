@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace MyWeeFee.Models
 {
-    public class Admin : User, IUserControl
+    public class Admin : User //, IUserControl
     {
+        /*
         public void logout() {}
         public void login(string Email, string Password) {}
         public void listUsers() {}
@@ -14,5 +15,6 @@ namespace MyWeeFee.Models
         public void setClass(string Classname) {}
         public void listAPs() {}
         public void setAP(Accesspoint AP) {}
+        */
     }
 }
