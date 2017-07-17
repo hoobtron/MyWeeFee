@@ -8,7 +8,8 @@ namespace MyWeeFee.Models
     {
         [Required]
         public bool IsBlocked { get; set; }
-        [Required]
-        public Class Class { get; set; }
+        [MaxLength(10)]
+        public string ClassName { get; set; }
+        public virtual Class Class { get; set; }
     }
 }

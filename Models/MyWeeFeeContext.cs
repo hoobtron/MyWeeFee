@@ -7,8 +7,8 @@ namespace MyWeeFee.Models
     {        
         public DbSet<Admin> T_Admins { get; set; }
         public DbSet<Teacher> T_Teachers { get; set; }
-        public DbSet<Student> T_Students { get; set; }
         public DbSet<Class> T_Classes { get; set; }
+        public DbSet<Student> T_Students { get; set; }
         public DbSet<Accesspoint> T_Accesspoints { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -24,22 +24,20 @@ namespace MyWeeFee.Models
 
             modelBuilder.Entity<Student>()
                 .HasKey(s => s.Email);
+                
+            modelBuilder.Entity<Class>()
+                .HasKey(c => c.ClassName);
 
             modelBuilder.Entity<Student>()
-                .HasOne(s => s.Class)
-                .WithMany(c => c.Students)
-                .HasForeignKey(s => s.Class)
-                .HasPrincipalKey(c => c.ClassName);
+                .HasOne(s => s.Class
+                .WithMany(s => s.Students)
+                .HasForeignKey(s => s.ClassName);
                 
             modelBuilder.Entity<Teacher>()
                 .HasKey(t => t.Email);
 
             modelBuilder.Entity<Accesspoint>()
                 .HasKey(a => a.Location);
-
-            modelBuilder.Entity<Class>()
-                .HasKey(c => c.ClassName);
-
         }
     }
 }
