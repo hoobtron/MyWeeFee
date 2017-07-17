@@ -29,7 +29,7 @@ namespace MyWeeFee.Models
                 .HasKey(c => c.ClassName);
 
             modelBuilder.Entity<Student>()
-                .HasOne(s => s.Class
+                .HasOne(s => s.Class)
                 .WithMany(s => s.Students)
                 .HasForeignKey(s => s.ClassName);
                 
