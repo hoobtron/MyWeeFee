@@ -7,8 +7,10 @@ namespace MyWeeFee.Models
     public class Student : User
     {
         [Required]
+        [Display(Name = "Gesperrt")]
         public bool IsBlocked { get; set; }
-        [MaxLength(10)]
+        [Display(Name = "Klasse")]
+        [StringLength(10)]
         public string ClassName { get; set; }
         public virtual Class Class { get; set; }
     }

@@ -13872,11 +13872,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\hhorlamus\\MyWeeFee\\MyWeeFee.csproj",
+      "projectUniqueName": "c:\\Users\\hhorlamus\\dotnetProjects\\MyWeeFee\\MyWeeFee.csproj",
       "projectName": "MyWeeFee",
-      "projectPath": "c:\\Users\\hhorlamus\\MyWeeFee\\MyWeeFee.csproj",
+      "projectPath": "c:\\Users\\hhorlamus\\dotnetProjects\\MyWeeFee\\MyWeeFee.csproj",
       "packagesPath": "C:\\Users\\hhorlamus\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\hhorlamus\\MyWeeFee\\obj\\",
+      "outputPath": "c:\\Users\\hhorlamus\\dotnetProjects\\MyWeeFee\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hhorlamus\\AppData\\Roaming\\NuGet\\NuGet.Config"

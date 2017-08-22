@@ -21,11 +21,12 @@ namespace MyWeeFee.Migrations
             modelBuilder.Entity("MyWeeFee.Models.Accesspoint", b =>
                 {
                     b.Property<string>("Location")
-                        .ValueGeneratedOnAdd()
                         .HasMaxLength(20);
 
                     b.Property<string>("Encryption")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue("WPA2")
                         .HasMaxLength(20);
 
                     b.Property<string>("SSID")
@@ -40,7 +41,6 @@ namespace MyWeeFee.Migrations
             modelBuilder.Entity("MyWeeFee.Models.Admin", b =>
                 {
                     b.Property<string>("Email")
-                        .ValueGeneratedOnAdd()
                         .HasMaxLength(50);
 
                     b.Property<string>("Firstname")
@@ -53,7 +53,7 @@ namespace MyWeeFee.Migrations
 
                     b.Property<string>("Surename")
                         .IsRequired()
-                        .HasMaxLength(40);
+                        .HasMaxLength(20);
 
                     b.HasKey("Email");
 
@@ -63,7 +63,6 @@ namespace MyWeeFee.Migrations
             modelBuilder.Entity("MyWeeFee.Models.Class", b =>
                 {
                     b.Property<string>("ClassName")
-                        .ValueGeneratedOnAdd()
                         .HasMaxLength(10);
 
                     b.Property<bool>("ExamMode");
@@ -76,7 +75,6 @@ namespace MyWeeFee.Migrations
             modelBuilder.Entity("MyWeeFee.Models.Student", b =>
                 {
                     b.Property<string>("Email")
-                        .ValueGeneratedOnAdd()
                         .HasMaxLength(50);
 
                     b.Property<string>("ClassName")
@@ -94,7 +92,7 @@ namespace MyWeeFee.Migrations
 
                     b.Property<string>("Surename")
                         .IsRequired()
-                        .HasMaxLength(40);
+                        .HasMaxLength(20);
 
                     b.HasKey("Email");
 
@@ -106,7 +104,6 @@ namespace MyWeeFee.Migrations
             modelBuilder.Entity("MyWeeFee.Models.Teacher", b =>
                 {
                     b.Property<string>("Email")
-                        .ValueGeneratedOnAdd()
                         .HasMaxLength(50);
 
                     b.Property<string>("Firstname")
@@ -119,7 +116,7 @@ namespace MyWeeFee.Migrations
 
                     b.Property<string>("Surename")
                         .IsRequired()
-                        .HasMaxLength(40);
+                        .HasMaxLength(20);
 
                     b.HasKey("Email");
 

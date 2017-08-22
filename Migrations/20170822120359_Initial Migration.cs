@@ -13,7 +13,7 @@ namespace MyWeeFee.Migrations
                 columns: table => new
                 {
                     Location = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    Encryption = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
+                    Encryption = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false, defaultValue: "WPA2"),
                     SSID = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
@@ -28,7 +28,7 @@ namespace MyWeeFee.Migrations
                     Email = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     Firstname = table.Column<string>(type: "TEXT", maxLength: 30, nullable: false),
                     Password = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    Surename = table.Column<string>(type: "TEXT", maxLength: 40, nullable: false)
+                    Surename = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,7 +54,7 @@ namespace MyWeeFee.Migrations
                     Email = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     Firstname = table.Column<string>(type: "TEXT", maxLength: 30, nullable: false),
                     Password = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    Surename = table.Column<string>(type: "TEXT", maxLength: 40, nullable: false)
+                    Surename = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,7 +70,7 @@ namespace MyWeeFee.Migrations
                     Firstname = table.Column<string>(type: "TEXT", maxLength: 30, nullable: false),
                     IsBlocked = table.Column<bool>(type: "INTEGER", nullable: false),
                     Password = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    Surename = table.Column<string>(type: "TEXT", maxLength: 40, nullable: false)
+                    Surename = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {

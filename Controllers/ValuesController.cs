@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MyWeeFee.Controllers
 {
+    // see Routing-Basics: https://medium.com/@pielegacy/an-in-depth-guide-into-a-ridiculously-simple-api-using-net-core-8f5edd427b0#c50e
     // http://localhost:5000/api/values
     [Route("api/[controller]")]
     public class ValuesController : Controller

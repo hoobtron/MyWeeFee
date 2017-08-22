@@ -16,9 +16,10 @@ namespace MyWeeFee.Models
             optionsBuilder.UseSqlite("Data Source=MyWeeFee.db");
         }
 
-        // define primary and foreign keys for DB Model entities
+        // constraints in Fluent API notation
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {            
+        {
+            // define primary and foreign keys for DB Model entities
             modelBuilder.Entity<Admin>()
                 .HasKey(a => a.Email);
 
@@ -38,6 +39,14 @@ namespace MyWeeFee.Models
 
             modelBuilder.Entity<Accesspoint>()
                 .HasKey(a => a.Location);
+
+
+            // set default value                
+            modelBuilder.Entity<Accesspoint>()
+                .Property(a => a.Encryption)
+                .HasDefaultValue("WPA2");
+
+            // the default value for bools (Student.IsBlocked and Class.ExamMode) is false
         }
     }
 }

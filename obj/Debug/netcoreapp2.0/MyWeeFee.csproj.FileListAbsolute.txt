@@ -11,3 +11,16 @@ C:\Users\hhorlamus\MyWeeFee\obj\Debug\netcoreapp2.0\MyWeeFee.AssemblyInfoInputs.
 C:\Users\hhorlamus\MyWeeFee\obj\Debug\netcoreapp2.0\MyWeeFee.AssemblyInfo.cs
 C:\Users\hhorlamus\MyWeeFee\obj\Debug\netcoreapp2.0\MyWeeFee.dll
 C:\Users\hhorlamus\MyWeeFee\obj\Debug\netcoreapp2.0\MyWeeFee.pdb
+C:\Users\hhorlamus\dotnetProjects\MyWeeFee\bin\Debug\netcoreapp2.0\x86\e_sqlite3.dll
+C:\Users\hhorlamus\dotnetProjects\MyWeeFee\bin\Debug\netcoreapp2.0\x64\e_sqlite3.dll
+C:\Users\hhorlamus\dotnetProjects\MyWeeFee\bin\Debug\netcoreapp2.0\MyWeeFee.deps.json
+C:\Users\hhorlamus\dotnetProjects\MyWeeFee\bin\Debug\netcoreapp2.0\MyWeeFee.runtimeconfig.json
+C:\Users\hhorlamus\dotnetProjects\MyWeeFee\bin\Debug\netcoreapp2.0\MyWeeFee.runtimeconfig.dev.json
+C:\Users\hhorlamus\dotnetProjects\MyWeeFee\bin\Debug\netcoreapp2.0\MyWeeFee.dll
+C:\Users\hhorlamus\dotnetProjects\MyWeeFee\bin\Debug\netcoreapp2.0\MyWeeFee.pdb
+C:\Users\hhorlamus\dotnetProjects\MyWeeFee\obj\Debug\netcoreapp2.0\MyWeeFee.csproj.CoreCompileInputs.cache
+C:\Users\hhorlamus\dotnetProjects\MyWeeFee\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\hhorlamus\dotnetProjects\MyWeeFee\obj\Debug\netcoreapp2.0\MyWeeFee.AssemblyInfoInputs.cache
+C:\Users\hhorlamus\dotnetProjects\MyWeeFee\obj\Debug\netcoreapp2.0\MyWeeFee.AssemblyInfo.cs
+C:\Users\hhorlamus\dotnetProjects\MyWeeFee\obj\Debug\netcoreapp2.0\MyWeeFee.dll
+C:\Users\hhorlamus\dotnetProjects\MyWeeFee\obj\Debug\netcoreapp2.0\MyWeeFee.pdb
