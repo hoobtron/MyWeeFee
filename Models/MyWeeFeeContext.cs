@@ -4,7 +4,12 @@ using System.Collections.Generic;
 namespace MyWeeFee.Models
 {
     public class MyWeeFeeContext : DbContext
-    {        
+    {  
+        public MyWeeFeeContext (DbContextOptions<MyWeeFeeContext> options)
+            : base(options)
+        {
+        }
+      
         public DbSet<Admin> T_Admins { get; set; }
         public DbSet<Teacher> T_Teachers { get; set; }
         public DbSet<Class> T_Classes { get; set; }
