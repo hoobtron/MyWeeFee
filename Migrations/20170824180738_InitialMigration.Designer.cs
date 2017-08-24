@@ -10,14 +10,14 @@ using System;
 namespace MyWeeFee.Migrations
 {
     [DbContext(typeof(MyWeeFeeContext))]
-    [Migration("20170822120359_Initial Migration")]
+    [Migration("20170824180738_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.0-preview2-25794");
+                .HasAnnotation("ProductVersion", "2.0.0-rtm-26452");
 
             modelBuilder.Entity("MyWeeFee.Models.Accesspoint", b =>
                 {
