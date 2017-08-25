@@ -12,7 +12,6 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Email" />
             <div class="form-group">
                 <label asp-for="Firstname" class="control-label"></label>
                 <input asp-for="Firstname" class="form-control" />
@@ -23,6 +22,8 @@
                 <input asp-for="Surename" class="form-control" />
                 <span asp-validation-for="Surename" class="text-danger"></span>
             </div>
+
+            <input type="hidden" asp-for="CurrentEmail" value="@ViewBag.currentEmail" />
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />

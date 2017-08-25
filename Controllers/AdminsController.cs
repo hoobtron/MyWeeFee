@@ -133,6 +133,8 @@ namespace MyWeeFee.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("Email,Firstname,Surename,Password")] Admin admin)
         {
+            ViewBag.currentEmail = admin.Email;
+
             if (id != admin.Email)
             {
                 return NotFound();
@@ -190,20 +192,44 @@ namespace MyWeeFee.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AdminExists(string id)
+        private bool AdminExists(string email)
         {
-            return _context.T_Admins.Any(e => e.Email == id);
+            return _context.T_Admins.Any(e => e.Email == email);
         }
 
         [AcceptVerbs("Get", "Post")]
-        public IActionResult VerifyEmail(string email) {
+        public IActionResult VerifyEmail(string email, string currentEmail) {
+/*
+            User user  = null;
+            //Check if user already exists
+            if (email.Equals(currentEmail)==false) {
+                user = _context.T_Admins.Where(a => a.Email == email).FirstOrDefault();
+            }
+            return Json(user == null);
+*/
+/*
+            bool existent = true;
+            if (!string.IsNullOrEmpty(email) && currentEmail == "undefined") {
+                var exists = _context.T_Admins.Where( x => x.Email == email).Single();
+                if(!string.IsNullOrEmpty(exists.ToString())) {
+                    existent = false;
+                }
+            }
+            if(!string.IsNullOrEmpty(email) && currentEmail != "undefined") {
+                var exists = _context.T_Admins.Where( x => x.Email == email && x.Email != currentEmail).Single();
+                if(!string.IsNullOrEmpty(exists.ToString())) {
+                    existent = false;
+                }
+            }
+            return Json(data: existent);
+*/
 
-            
-            if (AdminExists(email))
+            // check in DB if given email exists AND if it is not used for currently edited user (allow same/unchange for editing user)
+            if ((!string.IsNullOrEmpty(email) && AdminExists(email)) || (!string.IsNullOrEmpty(email) && AdminExists(email) && !AdminExists(currentEmail)))
             {
                 return Json(data: $"{email} ist bereits in Verwendung!");
             }
-
+            
             return Json(data: true);
         }
     }
