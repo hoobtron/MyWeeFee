@@ -17,14 +17,14 @@ namespace MyWeeFee.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "MyWeeFee Web-App";
 
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Ein Produkt der WeeFy AG";
 
             return View();
         }

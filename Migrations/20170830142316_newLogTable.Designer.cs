@@ -11,9 +11,10 @@ using System;
 namespace MyWeeFee.Migrations
 {
     [DbContext(typeof(MyWeeFeeContext))]
-    partial class MyWeeFeeContextModelSnapshot : ModelSnapshot
+    [Migration("20170830142316_newLogTable")]
+    partial class newLogTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

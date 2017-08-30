@@ -15,6 +15,7 @@ namespace MyWeeFee.Models
         public DbSet<Class> T_Classes { get; set; }
         public DbSet<Student> T_Students { get; set; }
         public DbSet<Accesspoint> T_Accesspoints { get; set; }
+        public DbSet<Logitem> T_Logitems { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -45,11 +46,17 @@ namespace MyWeeFee.Models
             modelBuilder.Entity<Accesspoint>()
                 .HasKey(a => a.Location);
 
+            modelBuilder.Entity<Logitem>()
+                .HasKey(a => a.Created);
 
-            // set default value                
+            // set default values
             modelBuilder.Entity<Accesspoint>()
                 .Property(a => a.Encryption)
                 .HasDefaultValue("WPA2");
+
+            // modelBuilder.Entity<Logitem>()
+            //     .Property(l => l.Created)
+            //     .HasDefaultValueSql("getdate()");
 
             // the default value for bools (Student.IsBlocked and Class.ExamMode) is false
         }
