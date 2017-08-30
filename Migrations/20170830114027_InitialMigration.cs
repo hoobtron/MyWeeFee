@@ -25,6 +25,8 @@ namespace MyWeeFee.Migrations
                 name: "T_Admins",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     Firstname = table.Column<string>(type: "TEXT", maxLength: 30, nullable: false),
                     Password = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
@@ -32,7 +34,7 @@ namespace MyWeeFee.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_T_Admins", x => x.Email);
+                    table.PrimaryKey("PK_T_Admins", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -51,6 +53,8 @@ namespace MyWeeFee.Migrations
                 name: "T_Teachers",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     Firstname = table.Column<string>(type: "TEXT", maxLength: 30, nullable: false),
                     Password = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
@@ -58,15 +62,17 @@ namespace MyWeeFee.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_T_Teachers", x => x.Email);
+                    table.PrimaryKey("PK_T_Teachers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "T_Students",
                 columns: table => new
                 {
-                    Email = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     ClassName = table.Column<string>(type: "TEXT", maxLength: 10, nullable: true),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     Firstname = table.Column<string>(type: "TEXT", maxLength: 30, nullable: false),
                     IsBlocked = table.Column<bool>(type: "INTEGER", nullable: false),
                     Password = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
@@ -74,7 +80,7 @@ namespace MyWeeFee.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_T_Students", x => x.Email);
+                    table.PrimaryKey("PK_T_Students", x => x.Id);
                     table.ForeignKey(
                         name: "FK_T_Students_T_Classes_ClassName",
                         column: x => x.ClassName,

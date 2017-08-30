@@ -24,16 +24,14 @@ namespace MyWeeFee.Controllers
             return View(await _context.T_Admins.ToListAsync());
         }
 
-        // GET: Admins/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        // Attention: parameter has to be named "id"!
+        // if parameter mame is "email", then: HTTP ERROR 404
 
+        // GET: Admins/Details/5
+        public async Task<IActionResult> Details(int id)
+        {
             var admin = await _context.T_Admins
-                .SingleOrDefaultAsync(m => m.Email == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (admin == null)
             {
                 return NotFound();
@@ -53,54 +51,8 @@ namespace MyWeeFee.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Email,Firstname,Surename,Password")] Admin admin)
+        public async Task<IActionResult> Create([Bind("Id, Email,Firstname,Surename,Password")] Admin admin)
         {
-
-/* Test 1
-            // TODO  intercept SqlException (unique email)
-
-            if (ModelState.IsValid)
-            {
-                if (!AdminExists(admin.Email))
-                {
-                    _context.Add(admin);
-                    await _context.SaveChangesAsync();     
-                    return RedirectToAction(nameof(Index));
-                }
-                else
-                {
-                    // TODO: message: email exists already
-                    return RedirectToAction(nameof(Create));
-                }
-            }
-            return View(admin);
-
-/* Test 2
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Add(admin);               
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AdminExists(admin.Email))
-                    {
-                        await _context.SaveChangesAsync();     
-                        return RedirectToAction(nameof(Index));
-                    }
-                    else
-                    {
-                        // TODO: message: email exists already
-                        return RedirectToAction(nameof(Create));
-                        throw;
-                    }
-                }
-                
-            }
-            return View(admin);
-
- */
             if (ModelState.IsValid)
             {
                 _context.Add(admin);
@@ -111,14 +63,9 @@ namespace MyWeeFee.Controllers
         }
 
         // GET: Admins/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var admin = await _context.T_Admins.SingleOrDefaultAsync(m => m.Email == id);
+            var admin = await _context.T_Admins.SingleOrDefaultAsync(m => m.Id == id);
             if (admin == null)
             {
                 return NotFound();
@@ -131,11 +78,9 @@ namespace MyWeeFee.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Email,Firstname,Surename,Password")] Admin admin)
+        public async Task<IActionResult> Edit(int id, [Bind("Id, Email,Firstname,Surename,Password")] Admin admin)
         {
-            ViewBag.currentEmail = admin.Email;
-
-            if (id != admin.Email)
+            if (id != admin.Id)
             {
                 return NotFound();
             }
@@ -164,15 +109,10 @@ namespace MyWeeFee.Controllers
         }
 
         // GET: Admins/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var admin = await _context.T_Admins
-                .SingleOrDefaultAsync(m => m.Email == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (admin == null)
             {
                 return NotFound();
@@ -184,9 +124,9 @@ namespace MyWeeFee.Controllers
         // POST: Admins/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var admin = await _context.T_Admins.SingleOrDefaultAsync(m => m.Email == id);
+            var admin = await _context.T_Admins.SingleOrDefaultAsync(m => m.Id == id);
             _context.T_Admins.Remove(admin);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -198,38 +138,13 @@ namespace MyWeeFee.Controllers
         }
 
         [AcceptVerbs("Get", "Post")]
-        public IActionResult VerifyEmail(string email, string currentEmail) {
-/*
-            User user  = null;
-            //Check if user already exists
-            if (email.Equals(currentEmail)==false) {
-                user = _context.T_Admins.Where(a => a.Email == email).FirstOrDefault();
-            }
-            return Json(user == null);
-*/
-/*
-            bool existent = true;
-            if (!string.IsNullOrEmpty(email) && currentEmail == "undefined") {
-                var exists = _context.T_Admins.Where( x => x.Email == email).Single();
-                if(!string.IsNullOrEmpty(exists.ToString())) {
-                    existent = false;
-                }
-            }
-            if(!string.IsNullOrEmpty(email) && currentEmail != "undefined") {
-                var exists = _context.T_Admins.Where( x => x.Email == email && x.Email != currentEmail).Single();
-                if(!string.IsNullOrEmpty(exists.ToString())) {
-                    existent = false;
-                }
-            }
-            return Json(data: existent);
-*/
-
+        public IActionResult IsEmailAvailable(string email, string initialEmail)
+        {
             // check in DB if given email exists AND if it is not used for currently edited user (allow same/unchange for editing user)
-            if ((!string.IsNullOrEmpty(email) && AdminExists(email)) || (!string.IsNullOrEmpty(email) && AdminExists(email) && !AdminExists(currentEmail)))
+            if ( AdminExists(email) && ( (!string.IsNullOrEmpty(initialEmail) && (email != initialEmail)) || (string.IsNullOrEmpty(initialEmail)) ) )
             {
                 return Json(data: $"{email} ist bereits in Verwendung!");
             }
-            
             return Json(data: true);
         }
     }

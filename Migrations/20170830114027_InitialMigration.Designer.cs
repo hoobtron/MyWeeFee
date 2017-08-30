@@ -10,8 +10,8 @@ using System;
 namespace MyWeeFee.Migrations
 {
     [DbContext(typeof(MyWeeFeeContext))]
-    [Migration("20170825141519_update1")]
-    partial class update1
+    [Migration("20170830114027_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,7 +41,11 @@ namespace MyWeeFee.Migrations
 
             modelBuilder.Entity("MyWeeFee.Models.Admin", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(50);
 
                     b.Property<string>("Firstname")
@@ -56,7 +60,7 @@ namespace MyWeeFee.Migrations
                         .IsRequired()
                         .HasMaxLength(20);
 
-                    b.HasKey("Email");
+                    b.HasKey("Id");
 
                     b.ToTable("T_Admins");
                 });
@@ -75,11 +79,15 @@ namespace MyWeeFee.Migrations
 
             modelBuilder.Entity("MyWeeFee.Models.Student", b =>
                 {
-                    b.Property<string>("Email")
-                        .HasMaxLength(50);
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ClassName")
                         .HasMaxLength(10);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.Property<string>("Firstname")
                         .IsRequired()
@@ -95,7 +103,7 @@ namespace MyWeeFee.Migrations
                         .IsRequired()
                         .HasMaxLength(20);
 
-                    b.HasKey("Email");
+                    b.HasKey("Id");
 
                     b.HasIndex("ClassName");
 
@@ -104,7 +112,11 @@ namespace MyWeeFee.Migrations
 
             modelBuilder.Entity("MyWeeFee.Models.Teacher", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(50);
 
                     b.Property<string>("Firstname")
@@ -119,7 +131,7 @@ namespace MyWeeFee.Migrations
                         .IsRequired()
                         .HasMaxLength(20);
 
-                    b.HasKey("Email");
+                    b.HasKey("Id");
 
                     b.ToTable("T_Teachers");
                 });

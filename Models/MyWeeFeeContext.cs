@@ -26,10 +26,10 @@ namespace MyWeeFee.Models
         {
             // define primary and foreign keys for DB Model entities
             modelBuilder.Entity<Admin>()
-                .HasKey(a => a.Email);
+                .HasKey(a => a.Id);
 
             modelBuilder.Entity<Student>()
-                .HasKey(s => s.Email);
+                .HasKey(s => s.Id);
                 
             modelBuilder.Entity<Class>()
                 .HasKey(c => c.ClassName);
@@ -40,7 +40,7 @@ namespace MyWeeFee.Models
                 .HasForeignKey(s => s.ClassName);
                 
             modelBuilder.Entity<Teacher>()
-                .HasKey(t => t.Email);
+                .HasKey(t => t.Id);
 
             modelBuilder.Entity<Accesspoint>()
                 .HasKey(a => a.Location);
