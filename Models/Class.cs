@@ -7,15 +7,16 @@ namespace MyWeeFee.Models
 {
     public class Class
     {
-        public Class(){ var StudentsList = new List<Student>(); }
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [StringLength(10, MinimumLength = 3)]
         public string ClassName { get; set; }
         // Notice that ClassName is Not Null column. So you must assign Class with Student entity every time you add or update Student.
+        
         [Required]
         [Display(Name = "Klausurmodus")]
         public bool ExamMode { get; set; }
+
         public virtual ICollection<Student> Students { get; set; }
     }
 }

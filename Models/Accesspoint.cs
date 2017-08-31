@@ -12,9 +12,11 @@ namespace MyWeeFee.Models
         [Display(Name = "Ort (eindeutige Benennung)")]
         [StringLength(20, MinimumLength = 3)]
         public string Location { get; set; }
+        
         [Required]
         [StringLength(20)]
         public string SSID { get; set; }
+
         [Required]
         [Display(Name = "Verschlüsselung")]
         [StringLength(20)]
