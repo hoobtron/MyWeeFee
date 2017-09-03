@@ -8,6 +8,7 @@ namespace MyWeeFee.Models
     public class User
     {
         [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required(ErrorMessage="{0} benötigt.")]

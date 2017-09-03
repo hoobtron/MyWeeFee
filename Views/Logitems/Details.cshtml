@@ -17,6 +17,12 @@
             @Html.DisplayFor(model => model.Id)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Email)
         </dt>
         <dd>
@@ -31,6 +37,5 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Created">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Zurück zur Liste</a>
 </div>

@@ -25,15 +25,10 @@ namespace MyWeeFee.Controllers
         }
 
         // GET: Logitems/Details/5
-        public async Task<IActionResult> Details(DateTime? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var logitem = await _context.T_Logitems
-                .SingleOrDefaultAsync(m => m.Created == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (logitem == null)
             {
                 return NotFound();
@@ -65,14 +60,9 @@ namespace MyWeeFee.Controllers
         }
 
         // GET: Logitems/Edit/5
-        public async Task<IActionResult> Edit(DateTime? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var logitem = await _context.T_Logitems.SingleOrDefaultAsync(m => m.Created == id);
+            var logitem = await _context.T_Logitems.SingleOrDefaultAsync(m => m.Id == id);
             if (logitem == null)
             {
                 return NotFound();
@@ -85,9 +75,9 @@ namespace MyWeeFee.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(DateTime id, [Bind("Id,Created,Email,Action")] Logitem logitem)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Created,Email,Action")] Logitem logitem)
         {
-            if (id != logitem.Created)
+            if (id != logitem.Id)
             {
                 return NotFound();
             }
@@ -101,7 +91,7 @@ namespace MyWeeFee.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!LogitemExists(logitem.Created))
+                    if (!LogitemExists(logitem.Id))
                     {
                         return NotFound();
                     }
@@ -116,15 +106,10 @@ namespace MyWeeFee.Controllers
         }
 
         // GET: Logitems/Delete/5
-        public async Task<IActionResult> Delete(DateTime? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var logitem = await _context.T_Logitems
-                .SingleOrDefaultAsync(m => m.Created == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (logitem == null)
             {
                 return NotFound();
@@ -136,17 +121,17 @@ namespace MyWeeFee.Controllers
         // POST: Logitems/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(DateTime id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var logitem = await _context.T_Logitems.SingleOrDefaultAsync(m => m.Created == id);
+            var logitem = await _context.T_Logitems.SingleOrDefaultAsync(m => m.Id == id);
             _context.T_Logitems.Remove(logitem);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool LogitemExists(DateTime id)
+        private bool LogitemExists(int id)
         {
-            return _context.T_Logitems.Any(e => e.Created == id);
+            return _context.T_Logitems.Any(e => e.Id == id);
         }
     }
 }

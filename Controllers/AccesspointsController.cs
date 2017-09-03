@@ -21,19 +21,16 @@ namespace MyWeeFee.Controllers
         // GET: Accesspoints
         public async Task<IActionResult> Index()
         {
-            return View(await _context.T_Accesspoints.ToListAsync());
+            var myWeeFeeContext = _context.T_Accesspoints.Include(a => a.APEncryption);
+            return View(await myWeeFeeContext.ToListAsync());
         }
 
         // GET: Accesspoints/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var accesspoint = await _context.T_Accesspoints
-                .SingleOrDefaultAsync(m => m.Location == id);
+                .Include(a => a.APEncryption)
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (accesspoint == null)
             {
                 return NotFound();
@@ -45,6 +42,8 @@ namespace MyWeeFee.Controllers
         // GET: Accesspoints/Create
         public IActionResult Create()
         {
+            ViewData["EncryptionType"] = new SelectList(_context.T_APEncryptions, "Encryption", "Encryption");
+            
             return View();
         }
 
@@ -53,7 +52,7 @@ namespace MyWeeFee.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Location,SSID,Encryption")] Accesspoint accesspoint)
+        public async Task<IActionResult> Create([Bind("Id,Location,SSID,Encryption")] Accesspoint accesspoint)
         {
             if (ModelState.IsValid)
             {
@@ -61,22 +60,19 @@ namespace MyWeeFee.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["EncryptionType"] = new SelectList(_context.T_APEncryptions, "Encryption", "Encryption", accesspoint.Encryption);
             return View(accesspoint);
         }
 
         // GET: Accesspoints/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var accesspoint = await _context.T_Accesspoints.SingleOrDefaultAsync(m => m.Location == id);
+            var accesspoint = await _context.T_Accesspoints.SingleOrDefaultAsync(m => m.Id == id);
             if (accesspoint == null)
             {
                 return NotFound();
             }
+            ViewData["EncryptionType"] = new SelectList(_context.T_APEncryptions, "Encryption", "Encryption", accesspoint.Encryption);
             return View(accesspoint);
         }
 
@@ -85,9 +81,9 @@ namespace MyWeeFee.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Location,SSID,Encryption")] Accesspoint accesspoint)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Location,SSID,Encryption")] Accesspoint accesspoint)
         {
-            if (id != accesspoint.Location)
+            if (id != accesspoint.Id)
             {
                 return NotFound();
             }
@@ -101,7 +97,7 @@ namespace MyWeeFee.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AccesspointExists(accesspoint.Location))
+                    if (!AccesspointExists(accesspoint.Id))
                     {
                         return NotFound();
                     }
@@ -112,19 +108,16 @@ namespace MyWeeFee.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["EncryptionType"] = new SelectList(_context.T_APEncryptions, "Encryption", "Encryption", accesspoint.Encryption);
             return View(accesspoint);
         }
 
         // GET: Accesspoints/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var accesspoint = await _context.T_Accesspoints
-                .SingleOrDefaultAsync(m => m.Location == id);
+                .Include(a => a.APEncryption)
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (accesspoint == null)
             {
                 return NotFound();
@@ -136,17 +129,17 @@ namespace MyWeeFee.Controllers
         // POST: Accesspoints/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var accesspoint = await _context.T_Accesspoints.SingleOrDefaultAsync(m => m.Location == id);
+            var accesspoint = await _context.T_Accesspoints.SingleOrDefaultAsync(m => m.Id == id);
             _context.T_Accesspoints.Remove(accesspoint);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AccesspointExists(string id)
+        private bool AccesspointExists(int id)
         {
-            return _context.T_Accesspoints.Any(e => e.Location == id);
+            return _context.T_Accesspoints.Any(e => e.Id == id);
         }
     }
 }

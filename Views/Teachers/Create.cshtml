@@ -1,10 +1,10 @@
 @model MyWeeFee.Models.Teacher
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Anlegen";
 }
 
-<h2>Create</h2>
+<h2>Anlegen</h2>
 
 <h4>Teacher</h4>
 <hr />
@@ -12,6 +12,16 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Firstname" class="control-label"></label>
+                <input asp-for="Firstname" class="form-control" autofocus />
+                <span asp-validation-for="Firstname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Surename" class="control-label"></label>
+                <input asp-for="Surename" class="form-control" />
+                <span asp-validation-for="Surename" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
@@ -23,24 +33,14 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Firstname" class="control-label"></label>
-                <input asp-for="Firstname" class="form-control" />
-                <span asp-validation-for="Firstname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Surename" class="control-label"></label>
-                <input asp-for="Surename" class="form-control" />
-                <span asp-validation-for="Surename" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Anlegen" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Zurück zur Liste</a>
 </div>
 
 @section Scripts {

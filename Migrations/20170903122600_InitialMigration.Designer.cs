@@ -11,8 +11,8 @@ using System;
 namespace MyWeeFee.Migrations
 {
     [DbContext(typeof(MyWeeFeeContext))]
-    [Migration("20170830142316_newLogTable")]
-    partial class newLogTable
+    [Migration("20170903122600_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,20 +22,25 @@ namespace MyWeeFee.Migrations
 
             modelBuilder.Entity("MyWeeFee.Models.Accesspoint", b =>
                 {
-                    b.Property<string>("Location")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("APEncryptionId");
+
+                    b.Property<int>("Encryption")
                         .HasMaxLength(20);
 
-                    b.Property<string>("Encryption")
+                    b.Property<string>("Location")
                         .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue("WPA2")
                         .HasMaxLength(20);
 
                     b.Property<string>("SSID")
                         .IsRequired()
                         .HasMaxLength(20);
 
-                    b.HasKey("Location");
+                    b.HasKey("Id");
+
+                    b.HasIndex("APEncryptionId");
 
                     b.ToTable("T_Accesspoints");
                 });
@@ -66,33 +71,52 @@ namespace MyWeeFee.Migrations
                     b.ToTable("T_Admins");
                 });
 
+            modelBuilder.Entity("MyWeeFee.Models.APEncryption", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Encryption")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("T_APEncryptions");
+                });
+
             modelBuilder.Entity("MyWeeFee.Models.Class", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<string>("ClassName")
+                        .IsRequired()
                         .HasMaxLength(10);
 
                     b.Property<bool>("ExamMode");
 
-                    b.HasKey("ClassName");
+                    b.HasKey("Id");
 
                     b.ToTable("T_Classes");
                 });
 
             modelBuilder.Entity("MyWeeFee.Models.Logitem", b =>
                 {
-                    b.Property<DateTime>("Created")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Action")
                         .IsRequired();
 
+                    b.Property<DateTime>("Created")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<bool>("Id");
-
-                    b.HasKey("Created");
+                    b.HasKey("Id");
 
                     b.ToTable("T_Logitems");
                 });
@@ -102,7 +126,7 @@ namespace MyWeeFee.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ClassName")
+                    b.Property<string>("ClassId")
                         .HasMaxLength(10);
 
                     b.Property<string>("Email")
@@ -124,8 +148,6 @@ namespace MyWeeFee.Migrations
                         .HasMaxLength(20);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClassName");
 
                     b.ToTable("T_Students");
                 });
@@ -156,11 +178,19 @@ namespace MyWeeFee.Migrations
                     b.ToTable("T_Teachers");
                 });
 
+            modelBuilder.Entity("MyWeeFee.Models.Accesspoint", b =>
+                {
+                    b.HasOne("MyWeeFee.Models.APEncryption", "APEncryption")
+                        .WithMany("Accesspoints")
+                        .HasForeignKey("APEncryptionId");
+                });
+
             modelBuilder.Entity("MyWeeFee.Models.Student", b =>
                 {
                     b.HasOne("MyWeeFee.Models.Class", "Class")
                         .WithMany("Students")
-                        .HasForeignKey("ClassName");
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace MyWeeFee.Models
 {
+    // The MyWeeFeeContext object handles the task of connecting to the database 
+    // and mapping Admin (Teacher, etc) objects to database records
     public class MyWeeFeeContext : DbContext
     {  
         public MyWeeFeeContext (DbContextOptions<MyWeeFeeContext> options)
@@ -15,6 +17,7 @@ namespace MyWeeFee.Models
         public DbSet<Class> T_Classes { get; set; }
         public DbSet<Student> T_Students { get; set; }
         public DbSet<Accesspoint> T_Accesspoints { get; set; }
+        public DbSet<APEncryption> T_APEncryptions { get; set; }
         public DbSet<Logitem> T_Logitems { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -33,26 +36,29 @@ namespace MyWeeFee.Models
                 .HasKey(s => s.Id);
                 
             modelBuilder.Entity<Class>()
-                .HasKey(c => c.ClassName);
+                .HasKey(c => c.Id);
 
             modelBuilder.Entity<Student>()
                 .HasOne(s => s.Class)
                 .WithMany(s => s.Students)
-                .HasForeignKey(s => s.ClassName);
+                .HasForeignKey(s => s.Id);
                 
             modelBuilder.Entity<Teacher>()
                 .HasKey(t => t.Id);
 
             modelBuilder.Entity<Accesspoint>()
-                .HasKey(a => a.Location);
+                .HasKey(a => a.Id);
+
+            modelBuilder.Entity<APEncryption>()
+                .HasKey(e => e.Id);
 
             modelBuilder.Entity<Logitem>()
-                .HasKey(a => a.Created);
+                .HasKey(l => l.Id);
 
             // set default values
             modelBuilder.Entity<Accesspoint>()
-                .Property(a => a.Encryption)
-                .HasDefaultValue("WPA2");
+                    .Property(a => a.SSID)
+                    .HasDefaultValue("OSZimt MyWeeFee");
 
             // modelBuilder.Entity<Logitem>()
             //     .Property(l => l.Created)

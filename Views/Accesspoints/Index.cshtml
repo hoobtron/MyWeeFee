@@ -1,17 +1,20 @@
 @model IEnumerable<MyWeeFee.Models.Accesspoint>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Accesspoints";
 }
 
-<h2>Index</h2>
+<h2>Accesspoints</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Neu anlegen</a>
 </p>
 <table class="table">
     <thead>
         <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.SSID)
                 </th>
@@ -25,15 +28,18 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.SSID)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Encryption)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Location">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Location">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Location">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Ändern</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Löschen</a>
             </td>
         </tr>
 }

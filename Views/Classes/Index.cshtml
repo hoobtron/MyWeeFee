@@ -1,17 +1,20 @@
 @model IEnumerable<MyWeeFee.Models.Class>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Klassen";
 }
 
-<h2>Index</h2>
+<h2>Klassen</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Neu anlegen</a>
 </p>
 <table class="table">
     <thead>
         <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ClassName)
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.ExamMode)
                 </th>
@@ -22,12 +25,15 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.ClassName)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.ExamMode)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ClassName">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ClassName">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ClassName">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Ändern</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Löschen</a>
             </td>
         </tr>
 }

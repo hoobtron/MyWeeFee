@@ -1,10 +1,10 @@
 @model MyWeeFee.Models.Student
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Anlegen";
 }
 
-<h2>Create</h2>
+<h2>Anlegen</h2>
 
 <h4>Student</h4>
 <hr />
@@ -13,15 +13,14 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="IsBlocked" /> @Html.DisplayNameFor(model => model.IsBlocked)
-                    </label>
-                </div>
+                <label asp-for="Firstname" class="control-label"></label>
+                <input asp-for="Firstname" class="form-control" autofocus />
+                <span asp-validation-for="Firstname" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClassName" class="control-label"></label>
-                <select asp-for="ClassName" class ="form-control" asp-items="ViewBag.ClassName"></select>
+                <label asp-for="Surename" class="control-label"></label>
+                <input asp-for="Surename" class="form-control" />
+                <span asp-validation-for="Surename" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
@@ -34,24 +33,25 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Firstname" class="control-label"></label>
-                <input asp-for="Firstname" class="form-control" />
-                <span asp-validation-for="Firstname" class="text-danger"></span>
+                <label asp-for="ClassId" class="control-label"></label>
+                <select asp-for="ClassId" class ="form-control" asp-items="ViewBag.ClassName"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Surename" class="control-label"></label>
-                <input asp-for="Surename" class="form-control" />
-                <span asp-validation-for="Surename" class="text-danger"></span>
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsBlocked" /> @Html.DisplayNameFor(model => model.IsBlocked)
+                    </label>
+                </div>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Anlegen" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Zurück zur Liste</a>
 </div>
 
 @section Scripts {

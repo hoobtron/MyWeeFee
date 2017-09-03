@@ -8,7 +8,9 @@ namespace MyWeeFee.Models
     public class Class
     {
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; }
+
+        [Required]
         [StringLength(10, MinimumLength = 3)]
         public string ClassName { get; set; }
         // Notice that ClassName is Not Null column. So you must assign Class with Student entity every time you add or update Student.

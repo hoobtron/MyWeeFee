@@ -1,10 +1,10 @@
 @model MyWeeFee.Models.Student
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Ändern";
 }
 
-<h2>Edit</h2>
+<h2>Ändern</h2>
 
 <h4>Student</h4>
 <hr />
@@ -12,29 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="IsBlocked" /> @Html.DisplayNameFor(model => model.IsBlocked)
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClassName" class="control-label"></label>
-                <select asp-for="ClassName" class="form-control" asp-items="ViewBag.ClassName"></select>
-                <span asp-validation-for="ClassName" class="text-danger"></span>
-            </div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="Firstname" class="control-label"></label>
                 <input asp-for="Firstname" class="form-control" />
@@ -46,14 +24,36 @@
                 <span asp-validation-for="Surename" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClassId" class="control-label"></label>
+                <select asp-for="ClassId" class="form-control" asp-items="ViewBag.ClassName"></select>
+                <span asp-validation-for="ClassId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsBlocked" /> @Html.DisplayNameFor(model => model.IsBlocked)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Speichern" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Zurück zur Liste</a>
 </div>
 
 @section Scripts {

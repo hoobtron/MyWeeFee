@@ -1,0 +1,22 @@
+[
+    {
+        "Id": 0,
+        "Encryption": "Ohne (Offen)"
+    },
+    {
+        "Id": 1,
+        "Encryption": "WEP"
+    },
+    {
+        "Id": 2,
+        "Encryption": "WPA"
+    },
+    {
+        "Id": 3,
+        "Encryption": "WPA2 (AES)"
+    },
+    {
+        "Id": 4,
+        "Encryption": "WPA2 (TKIP)"
+    }
+]

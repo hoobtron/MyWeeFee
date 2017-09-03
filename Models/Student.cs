@@ -12,7 +12,7 @@ namespace MyWeeFee.Models
         
         [Display(Name = "Klasse")]
         [StringLength(10)]
-        public string ClassName { get; set; }
+        public string ClassId { get; set; }
 
         public virtual Class Class { get; set; }
     }

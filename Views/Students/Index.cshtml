@@ -1,19 +1,22 @@
 @model IEnumerable<MyWeeFee.Models.Student>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Studenten";
 }
 
-<h2>Index</h2>
+<h2>Studenten</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Neu anlegen</a>
 </p>
 <table class="table">
     <thead>
         <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.IsBlocked)
+                    @Html.DisplayNameFor(model => model.Firstname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Surename)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Email)
@@ -22,14 +25,11 @@
                     @Html.DisplayNameFor(model => model.Password)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Firstname)
+                    @Html.DisplayNameFor(model => model.Class)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Surename)
+                    @Html.DisplayNameFor(model => model.IsBlocked)
                 </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Class)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -37,7 +37,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.IsBlocked)
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surename)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
@@ -46,18 +49,15 @@
                 @Html.DisplayFor(modelItem => item.Password)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Firstname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Surename)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Class.ClassName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                @Html.DisplayFor(modelItem => item.IsBlocked)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Ändern</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Löschen</a>
             </td>
         </tr>
 }

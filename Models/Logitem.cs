@@ -8,14 +8,15 @@ namespace MyWeeFee.Models
     public class Logitem
     {
         [Required]
-        public bool Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "Datum/Zeit")]
         // initializing an auto-implemented property (alternatively: set as default value in db-context)
-        public System.DateTime Created { get; set; } = System.DateTime.UtcNow;
+        public System.DateTime Created { get; set; } = System.DateTime.UtcNow.ToLocalTime();
 
         [Required]
         [Display(Name = "User-Email")]

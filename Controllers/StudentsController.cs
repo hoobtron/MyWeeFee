@@ -56,7 +56,7 @@ namespace MyWeeFee.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IsBlocked,ClassName,Id,Email,Password,Firstname,Surename")] Student student)
+        public async Task<IActionResult> Create([Bind("IsBlocked,ClassId,Id,Email,Password,Firstname,Surename")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace MyWeeFee.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClassName"] = new SelectList(_context.T_Classes, "ClassName", "ClassName", student.ClassName);
+            ViewData["ClassName"] = new SelectList(_context.T_Classes, "ClassName", "ClassName", student.ClassId);
             return View(student);
         }
 
@@ -81,7 +81,7 @@ namespace MyWeeFee.Controllers
             {
                 return NotFound();
             }
-            ViewData["ClassName"] = new SelectList(_context.T_Classes, "ClassName", "ClassName", student.ClassName);
+            ViewData["ClassName"] = new SelectList(_context.T_Classes, "ClassName", "ClassName", student.ClassId);
             return View(student);
         }
 
@@ -90,7 +90,7 @@ namespace MyWeeFee.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IsBlocked,ClassName,Id,Email,Password,Firstname,Surename")] Student student)
+        public async Task<IActionResult> Edit(int id, [Bind("IsBlocked,ClassId,Id,Email,Password,Firstname,Surename")] Student student)
         {
             if (id != student.Id)
             {
@@ -117,7 +117,7 @@ namespace MyWeeFee.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClassName"] = new SelectList(_context.T_Classes, "ClassName", "ClassName", student.ClassName);
+            ViewData["ClassName"] = new SelectList(_context.T_Classes, "ClassName", "ClassName", student.ClassId);
             return View(student);
         }
 

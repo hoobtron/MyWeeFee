@@ -23,16 +23,37 @@ namespace MyWeeFee
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MyWeeFeeContext>(options =>
-            //options.UseSqlite(Configuration.GetConnectionString("...")));
-            options.UseSqlite("Data Source=MyWeeFee.db"));
-
+            // Add framework services.
             services.AddMvc();
+
+            // register database context with Dependency Injection container 
+            services.AddDbContext<MyWeeFeeContext>(options =>
+                // read connectionstring of defined database from appsettings.json
+                options.UseSqlite(Configuration.GetConnectionString("MyWeeFeeContextSQLite")));
+                // alternatively, link directly:
+                // options.UseSqlite("Data Source=MyWeeFee.db"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            // seed DB with default datasets
+            // try 1
+            // app.ApplicationServices.GetRequiredService<MyWeeFeeContext>().EnsureSeeded();
+
+            // try 2 - with scope
+            /*
+            var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            using (var serviceScope = scopeFactory.CreateScope())
+            {
+                if (!serviceScope.ServiceProvider.GetService<MyWeeFeeContext>().AllMigrationsApplied())
+                {
+                    serviceScope.ServiceProvider.GetService<MyWeeFeeContext>().Database.Migrate();
+                    serviceScope.ServiceProvider.GetService<MyWeeFeeContext>().EnsureSeeded();
+                }
+            }*/
+            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

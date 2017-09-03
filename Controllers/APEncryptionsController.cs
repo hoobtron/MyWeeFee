@@ -9,75 +9,85 @@ using MyWeeFee.Models;
 
 namespace MyWeeFee.Controllers
 {
-    public class ClassesController : Controller
+    public class APEncryptionsController : Controller
     {
         private readonly MyWeeFeeContext _context;
 
-        public ClassesController(MyWeeFeeContext context)
+        public APEncryptionsController(MyWeeFeeContext context)
         {
             _context = context;
         }
 
-        // GET: Classes
+        // GET: APEncryptions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.T_Classes.ToListAsync());
+            return View(await _context.T_APEncryptions.ToListAsync());
         }
 
-        // GET: Classes/Details/5
-        public async Task<IActionResult> Details(int id)
+        // GET: APEncryptions/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
-            var @class = await _context.T_Classes
-                .SingleOrDefaultAsync(m => m.Id == id);
-            if (@class == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            return View(@class);
+            var aPEncryption = await _context.T_APEncryptions
+                .SingleOrDefaultAsync(m => m.Id == id);
+            if (aPEncryption == null)
+            {
+                return NotFound();
+            }
+
+            return View(aPEncryption);
         }
 
-        // GET: Classes/Create
+        // GET: APEncryptions/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Classes/Create
+        // POST: APEncryptions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ClassName,ExamMode")] Class @class)
+        public async Task<IActionResult> Create([Bind("Id,Encryption")] APEncryption aPEncryption)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(@class);
+                _context.Add(aPEncryption);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(@class);
+            return View(aPEncryption);
         }
 
-        // GET: Classes/Edit/5
-        public async Task<IActionResult> Edit(int id)
+        // GET: APEncryptions/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
-            var @class = await _context.T_Classes.SingleOrDefaultAsync(m => m.Id == id);
-            if (@class == null)
+            if (id == null)
             {
                 return NotFound();
             }
-            return View(@class);
+
+            var aPEncryption = await _context.T_APEncryptions.SingleOrDefaultAsync(m => m.Id == id);
+            if (aPEncryption == null)
+            {
+                return NotFound();
+            }
+            return View(aPEncryption);
         }
 
-        // POST: Classes/Edit/5
+        // POST: APEncryptions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ClassName,ExamMode")] Class @class)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Encryption")] APEncryption aPEncryption)
         {
-            if (id != @class.Id)
+            if (id != aPEncryption.Id)
             {
                 return NotFound();
             }
@@ -86,12 +96,12 @@ namespace MyWeeFee.Controllers
             {
                 try
                 {
-                    _context.Update(@class);
+                    _context.Update(aPEncryption);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClassExists(@class.Id))
+                    if (!APEncryptionExists(aPEncryption.Id))
                     {
                         return NotFound();
                     }
@@ -102,37 +112,41 @@ namespace MyWeeFee.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(@class);
+            return View(aPEncryption);
         }
 
-        // GET: Classes/Delete/5
-        public async Task<IActionResult> Delete(int id)
+        // GET: APEncryptions/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            var @class = await _context.T_Classes
-                .SingleOrDefaultAsync(m => m.Id == id);
-            if (@class == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            return View(@class);
+            var aPEncryption = await _context.T_APEncryptions
+                .SingleOrDefaultAsync(m => m.Id == id);
+            if (aPEncryption == null)
+            {
+                return NotFound();
+            }
+
+            return View(aPEncryption);
         }
 
-        // POST: Classes/Delete/5
+        // POST: APEncryptions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            // TODO: check if class already used in students table
-            var @class = await _context.T_Classes.SingleOrDefaultAsync(m => m.Id == id);
-            _context.T_Classes.Remove(@class);
+            var aPEncryption = await _context.T_APEncryptions.SingleOrDefaultAsync(m => m.Id == id);
+            _context.T_APEncryptions.Remove(aPEncryption);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClassExists(int id)
+        private bool APEncryptionExists(int id)
         {
-            return _context.T_Classes.Any(e => e.Id == id);
+            return _context.T_APEncryptions.Any(e => e.Id == id);
         }
     }
 }
